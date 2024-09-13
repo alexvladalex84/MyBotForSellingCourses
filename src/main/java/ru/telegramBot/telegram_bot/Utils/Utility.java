@@ -50,5 +50,9 @@ public class Utility {
         return null;
     }
 
+    public static String testForGitHub() {
+        return "hello";
+    }
+
 }
 
