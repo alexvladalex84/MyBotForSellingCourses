@@ -9,18 +9,22 @@ public class ConsultantRegisterDto {
     private String userName;
     private String numberPhone;
     private StatusConsultant statusWork;
+    private Long chatId;
 
     public ConsultantRegisterDto() {
 
     }
 
-    public ConsultantRegisterDto(long pk, String firstName, String lastName, String userName, String numberPhone, StatusConsultant statusWork) {
+
+    public ConsultantRegisterDto(long pk, String firstName, String lastName,
+                                 String userName, String numberPhone, StatusConsultant statusWork, Long chatId) {
         this.pk = pk;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.numberPhone = numberPhone;
         this.statusWork = statusWork;
+        this.chatId = chatId;
     }
 
     public long getPk() {
@@ -71,6 +75,14 @@ public class ConsultantRegisterDto {
         this.statusWork = statusWork;
     }
 
+    public Long getChatId() {
+        return chatId;
+    }
+
+    public void setChatId(Long chatId) {
+        this.chatId = chatId;
+    }
+
     @Override
     public String toString() {
         return "ConsultantRegisterDto{" +
@@ -80,6 +92,7 @@ public class ConsultantRegisterDto {
                 ", userName='" + userName + '\'' +
                 ", numberPhone='" + numberPhone + '\'' +
                 ", statusWork=" + statusWork +
+                ", chatId=" + chatId +
                 '}';
     }
 
@@ -88,11 +101,11 @@ public class ConsultantRegisterDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ConsultantRegisterDto that = (ConsultantRegisterDto) o;
-        return pk == that.pk && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(userName, that.userName) && Objects.equals(numberPhone, that.numberPhone) && statusWork == that.statusWork;
+        return pk == that.pk && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(userName, that.userName) && Objects.equals(numberPhone, that.numberPhone) && statusWork == that.statusWork && Objects.equals(chatId, that.chatId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(pk, firstName, lastName, userName, numberPhone, statusWork);
+        return Objects.hash(pk, firstName, lastName, userName, numberPhone, statusWork, chatId);
     }
 }

@@ -51,7 +51,7 @@ public class ConsultantSendMessage {
     public SendMessage commandStartForConsultant(Long chatId, String userName) {
 
         Consultant consultant = consultantService.getConsultantByUserName(userName);
-        if (consultant != null) {
+        if (consultant != null ) {
             SendMessage message = new SendMessage();
             message.setChatId(chatId);
             message.setText("Привет консультант!Можешь проверить кто ещё не получил скидку ⬇\uFE0F");

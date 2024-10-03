@@ -44,6 +44,7 @@ public class ListenerTGBot extends TelegramLongPollingBot {
     private final Chats chats;
     private final ClientService clientService;
     private final ConsultantService consultantService;
+    private final AdminTgBotService adminTgBotService;
 
     Logger LOG = LoggerFactory.getLogger(ListenerTGBot.class);
     //меню для бота в кострукторе
@@ -52,7 +53,7 @@ public class ListenerTGBot extends TelegramLongPollingBot {
     public ListenerTGBot(SendMethodService sendMethodService, RegistrationTGService registrationTGService, BotConfig botConfig, MenuTGService menuTGService, UserService userService
             , ConsultantTGService consultantTGService, KeyBoardService keyBoardService, ConsultantSendMessage consultantSendMessage
             , ConsultantKeyBoardService consultantKeyBoardService, Chats chats, UserTgSendMessage userTgSendMessage, ClientService clientService
-            , ConsultantService consultantService) {
+            , ConsultantService consultantService,AdminTgBotService adminTgBotService) {
 
         this.botConfig = botConfig;
         this.menuTGService = menuTGService;
@@ -67,6 +68,7 @@ public class ListenerTGBot extends TelegramLongPollingBot {
         this.userTgSendMessage = userTgSendMessage;
         this.clientService = clientService;
         this.consultantService = consultantService;
+        this.adminTgBotService = adminTgBotService;
 
 
         List<BotCommand> listOfCommand = menuTGService.getListOfCommands();
@@ -101,7 +103,15 @@ public class ListenerTGBot extends TelegramLongPollingBot {
                     if (consultantSendMessage.commandStartForConsultant(chatId, userName) != null) {
                         executeAndCheckSendMessage(consultantSendMessage.commandStartForConsultant(chatId, userName));
 
-                    } else {
+                    }
+                    else if (chatId == 482764411) {
+                        executeAndCheckSendMessage
+                                (adminTgBotService.commandStartForAdmin(482764411));
+                                    executeAndCheckSendMessage
+                                            (adminTgBotService.registrationConsultantTg(chatId,userName,firstName ));
+
+                    }
+                    else {
                         userService.registerUser(update.getMessage());
                         SendMessage message = sendMethodService.commandStartForClient(chatId, firstName);
                         executeAndCheckSendMessage(message);
@@ -228,9 +238,7 @@ public class ListenerTGBot extends TelegramLongPollingBot {
             }
 
         }
-//        else if (update.h) {
-//
-//        }
+
     }
 
     protected SendMessage consultantOrClient(String chatId, SendMessage sendMessage) {

@@ -1,0 +1,42 @@
+version: '3.5'
+#volumes перечисляется какие тома будут использоваться для работы наших кнтейнеров
+volumes:
+#  pg_demo сюда будут сохраняться данные в файловой системе компа
+  pg_demo:
+#    services в данном блоке перечисляются контейнеры котрые мы будем использовать
+services:
+  bot_db:
+#    image какой образ будет скачиваться для этого докер контейнера
+    image: postgres:14
+    container_name: ps-psql
+    restart: always
+
+    environment:
+      - POSTGRES_DB=telegram_botForWork
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Valerihca2012
+    volumes:
+      - pg_demo:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:25432:5432"
+
+
+
+  app:
+
+    restart: always
+
+    build: .
+    ports:
+      - "8081:8081"
+    depends_on:
+      - bot_db
+    environment:
+        - SPRING_DATASOURCE_URL=jdbc:postgresql://bot_db:5432/telegram_botForWork
+
+
+
+
+
+
+

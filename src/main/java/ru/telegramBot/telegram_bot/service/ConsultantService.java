@@ -35,6 +35,7 @@ public class ConsultantService {
         consultant.setLastName(consRegDto.getLastName());
         consultant.setUserName(consRegDto.getUserName());
         consultant.setStatusWork(consRegDto.getStatusWork());
+        consultant.setChatId(consRegDto.getChatId());
 
         if (consultantRepository.findByUserName(consultant.getUserName()).isEmpty()) {
             consultantRepository.save(consultant);

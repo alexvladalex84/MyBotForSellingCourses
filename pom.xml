@@ -14,7 +14,7 @@
 	<name>telegram_bot_newProgect</name>
 	<description>progect_for_telegram_bot</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 
